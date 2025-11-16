@@ -6,13 +6,19 @@ import {
   getUserById,
   updateUser,
 } from '../controllers/users.controller';
+import { validate } from '../middlewares/validate';
+import {
+  createUserValidator,
+  updateUserValidator,
+  userIdValidator,
+} from '../validations/user-validations';
 
 const router = Router();
 
 router.get('/', getAllUsers);
-router.get('/:id', getUserById);
-router.put('/:id', updateUser);
-router.post('/', createUser);
-router.delete('/:id', deleteUser);
+router.get('/:id', userIdValidator, validate, getUserById);
+router.put('/:id', updateUserValidator, validate, updateUser);
+router.post('/', createUserValidator, validate, createUser);
+router.delete('/:id', userIdValidator, validate, deleteUser);
 
 export default router;
