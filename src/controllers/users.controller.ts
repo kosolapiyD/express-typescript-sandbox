@@ -1,4 +1,5 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
+import { AppError } from '../utils/app-error';
 
 type User = {
   id: number;
@@ -19,18 +20,28 @@ const users: User[] = [
   },
 ];
 
-// GET /users
-export const getAllUsers = (req: Request, res: Response) => {
+export const getAllUsers = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  if (users.length === 0) {
+    return next(new AppError(404, 'No users found'));
+  }
+
   res.json(users);
 };
 
-// GET /users/:id
-export const getUserById = (req: Request, res: Response) => {
+export const getUserById = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const id = parseInt(req.params.id);
   const user = users.find((u) => u.id === id);
 
   if (!user) {
-    return res.status(404).json({ message: 'User not found' });
+    return next(new AppError(404, 'User not found'));
   }
 
   res.json(user);

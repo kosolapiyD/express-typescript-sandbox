@@ -1,0 +1,6 @@
+import { Request, Response, NextFunction } from 'express';
+import { AppError } from '../utils/app-error';
+
+export const notFound = (req: Request, res: Response, next: NextFunction) => {
+  next(new AppError(404, `Route not found: ${req.method} ${req.originalUrl}`));
+};
