@@ -74,3 +74,13 @@ export const createUser = (req: Request, res: Response, next: NextFunction) => {
   users.push(newUser);
   res.status(201).json(newUser);
 };
+
+export const deleteUser = (req: Request, res: Response, next: NextFunction) => {
+  const id = parseInt(req.params.id);
+  const userIndex = users.findIndex((u) => u.id === id);
+  if (userIndex === -1) {
+    return next(new AppError(404, 'User not found'));
+  }
+  const deletedUser = users.splice(userIndex, 1)[0];
+  res.json(deletedUser);
+};
