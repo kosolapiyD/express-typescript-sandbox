@@ -1,14 +1,18 @@
 import express from 'express';
 import routes from './routes/index';
 
-import { notFound } from './middlewares/not-found';
 import { errorHandler } from './middlewares/error-handler';
+import { logger } from './middlewares/logger';
+import { notFound } from './middlewares/not-found';
 
 const app = express();
 
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// register logger middleware
+app.use(logger);
 
 // Routes
 app.use('/', routes);
