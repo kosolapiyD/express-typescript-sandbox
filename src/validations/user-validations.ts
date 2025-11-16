@@ -1,4 +1,4 @@
-import { body, param } from 'express-validator';
+import { body, param, query } from 'express-validator';
 
 export const createUserValidator = [
   body('name')
@@ -44,4 +44,11 @@ export const updateUserValidator = [
     .withMessage('Password must be a string')
     .isLength({ min: 5 })
     .withMessage('Password must be at least 5 characters'),
+];
+
+export const usersQueryValidator = [
+  query('limit')
+    .optional()
+    .isInt({ gt: 0, lt: 11 }) // 1–10
+    .withMessage('limit must be an integer between 1 and 10'),
 ];

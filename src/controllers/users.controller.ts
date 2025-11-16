@@ -8,11 +8,26 @@ export const getAllUsers = (
   res: Response,
   next: NextFunction
 ) => {
-  if (users.length === 0) {
+  const filter = req.query.filter as string | undefined;
+  const limitParam = req.query.limit as string | undefined;
+
+  let result = [...users];
+
+  if (filter) {
+    const search = filter.toLowerCase();
+    result = result.filter((u) => u.name.toLowerCase().includes(search));
+  }
+
+  if (limitParam) {
+    const limit = Number(limitParam);
+    result = result.slice(0, limit);
+  }
+
+  if (result.length === 0) {
     return next(new AppError(404, 'No users found'));
   }
 
-  res.json(users);
+  return res.json(result);
 };
 
 export const getUserById = (
