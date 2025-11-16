@@ -46,3 +46,31 @@ export const getUserById = (
 
   res.json(user);
 };
+
+export const updateUser = (req: Request, res: Response, next: NextFunction) => {
+  const id = parseInt(req.params.id);
+  const { name, email, password } = req.body;
+  const user = users.find((u) => u.id === id);
+  if (!user) {
+    return next(new AppError(404, 'User not found'));
+  }
+  user.name = name;
+  user.email = email;
+  user.password = password;
+  res.json(user);
+};
+
+export const createUser = (req: Request, res: Response, next: NextFunction) => {
+  const { name, email, password } = req.body;
+  if (!name || !email || !password) {
+    return next(new AppError(400, 'Name, email, and password are required'));
+  }
+  const newUser: User = {
+    id: users.length + 1,
+    name,
+    email,
+    password,
+  };
+  users.push(newUser);
+  res.status(201).json(newUser);
+};
