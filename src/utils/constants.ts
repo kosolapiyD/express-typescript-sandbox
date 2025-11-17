@@ -6,6 +6,13 @@ export type User = {
   age?: number;
 };
 
+export type Product = {
+  id: number;
+  name: string;
+  price: number;
+  description?: string;
+};
+
 // Global mock data
 export const users: User[] = [
   {
@@ -42,5 +49,38 @@ export const users: User[] = [
     email: 'michael@test.com',
     password: 'michael123',
     age: 35,
+  },
+];
+
+export const products: Product[] = [
+  {
+    id: 1,
+    name: 'Product 1',
+    price: 10.99,
+    description: 'This is the first product.',
+  },
+  {
+    id: 2,
+    name: 'Product 2',
+    price: 19.99,
+    description: 'This is the second product.',
+  },
+  {
+    id: 3,
+    name: 'Product 3',
+    price: 5.99,
+    description: 'This is the third product.',
+  },
+  {
+    id: 4,
+    name: 'Product 4',
+    price: 15.49,
+    description: 'This is the fourth product.',
+  },
+  {
+    id: 5,
+    name: 'Product 5',
+    price: 25.0,
+    description: 'This is the fifth product.',
   },
 ];
