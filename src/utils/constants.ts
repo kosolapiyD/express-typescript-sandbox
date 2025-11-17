@@ -1,17 +1,4 @@
-export type User = {
-  id: number;
-  name: string;
-  email: string;
-  password: string;
-  age?: number;
-};
-
-export type Product = {
-  id: number;
-  name: string;
-  price: number;
-  description?: string;
-};
+import { Product, User } from '../types/types';
 
 // Global mock data
 export const users: User[] = [

@@ -1,7 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 import { AppError } from '../utils/app-error';
 
-import { users, User } from '../utils/constants';
+import { users } from '../utils/constants';
+import { User } from '../types/types';
 
 export const getAllUsers = (
   req: Request,
