@@ -12,7 +12,7 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser('my-secret-key'));
+app.use(cookieParser(process.env.COOKIE_SECRET)); // add secret for signed cookies
 
 // register logger middleware
 app.use(logger);
