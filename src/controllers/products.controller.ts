@@ -9,12 +9,13 @@ export const getAllProducts = (
   next: NextFunction
 ) => {
   // NOT signed cookie check example
-  if (req.cookies['express-cookie-id'] !== process.env.COOKIE_SECRET) {
-    return next(new AppError(401, 'Need a valid cookie to see products'));
-  }
+  //   if (req.cookies['express-cookie-id'] !== process.env.COOKIE_SECRET) {
+  //     return next(new AppError(401, 'Need a valid cookie to see products'));
+  //   }
 
   // Signed cookie check example
   if (req.signedCookies['express-cookie-id'] !== process.env.COOKIE_SECRET) {
+    console.log('Invalid signed cookie');
     return next(
       new AppError(401, 'Need a valid signed cookie to see products')
     );

@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 export const homeController = (req: Request, res: Response) => {
   res.cookie('express-cookie-id', process.env.COOKIE_SECRET, {
     httpOnly: true,
-    secure: false,
+    secure: process.env.NODE_ENV === 'production',
     maxAge: 10000, // 10 seconds
     // maxAge: 3600000, // 1 hour
     signed: true, // if true requires a secret in cookieParser
