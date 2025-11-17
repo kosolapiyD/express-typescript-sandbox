@@ -6,6 +6,7 @@ import { logger } from './middlewares/logger';
 import { notFound } from './middlewares/not-found';
 
 import cookieParser from 'cookie-parser';
+import { sessionMiddleware } from './middlewares/session';
 
 const app = express();
 
@@ -13,6 +14,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.COOKIE_SECRET)); // add secret for signed cookies
+app.use(sessionMiddleware);
 
 // register logger middleware
 app.use(logger);
