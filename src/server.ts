@@ -1,9 +1,14 @@
 import app from './app';
+import { connectDB } from './config/db';
 
 const port = process.env.PORT || 8080;
 
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});
+const start = async () => {
+  await connectDB();
 
-export default app;
+  app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
+  });
+};
+
+start();
